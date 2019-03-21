@@ -22,6 +22,13 @@ module.exports = (env, argv) => {
     '*': proxyURL
   };
 
+  const postCSSLoader = {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: true,
+    }
+  };
+
   var config = {
     entry: {
       index : "./src/index.js",
@@ -49,12 +56,7 @@ module.exports = (env, argv) => {
             },
             "style-loader",
             "css-loader",
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true 
-              }
-            },
+            postCSSLoader,
           ]
         },
       ]
@@ -94,12 +96,7 @@ module.exports = (env, argv) => {
         // ( argv.mode !== 'production' ) ? 'style-loader' : MiniCssExtractPlugin.loader,
         MiniCssExtractPlugin.loader,
         "css-loader", // translates CSS into CommonJS
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        },
+        postCSSLoader,
         { loader: 'sass-loader', options: { sourceMap: true } }
     ]
   });
@@ -147,6 +144,8 @@ module.exports = (env, argv) => {
 
   if ( 'production' !== argv.mode ) {
     config.devtool = 'inline-source-map';
+  } else {
+    config.devtool = 'source-map';
   }
 
   return config;

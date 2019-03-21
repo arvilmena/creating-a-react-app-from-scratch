@@ -21,7 +21,7 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <script src="<?php echo $package->getUrl('index.js'); ?>"></script>
+  <script src="<?php echo $package->getUrl('main.js'); ?>"></script>
   <script src="<?php echo $package->getUrl('globalStyles.js'); ?>"></script>
 </body>
 
