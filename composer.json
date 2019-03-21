@@ -1,0 +1,12 @@
+{
+    "name": "arvil/creating-a-react-app-from-scratch",
+    "authors": [
+        {
+            "name": "Arvil Meña",
+            "email": "arvilmena@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/asset": "^4.2"
+    }
+}

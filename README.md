@@ -10,7 +10,13 @@ Clone this repo and install dependencies with `npm install`.
 
 ### Starting The Dev Server
 
-To start the server and start hacking, run
+Start PHP Server
+
+```BASH
+php -S localhost:9090 -t public
+```
+
+Start Webpack Dev Server
 
 ```BASH
 npm start
