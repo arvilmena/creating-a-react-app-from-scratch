@@ -10,11 +10,9 @@ Clone this repo and install dependencies with `npm install`.
 
 ### Starting The Dev Server
 
-Start PHP Server
+**Important!** Host the public folder into a vhost, with this `webpack.config.js` use:
 
-```BASH
-php -S localhost:9090 -t public
-```
+```http://create-react-app-scratch.test```
 
 Start Webpack Dev Server
 
@@ -24,3 +22,8 @@ npm start
 
 This starter uses webpack-dev-server to spin up an Express server with Hot-Reloading capability. Changes to code in `.src` should cause pages to reload.
 
+### Production asset bundling ###
+
+```BASH
+npm run build
+```

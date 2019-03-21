@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 var paths = {
   publicFolder: "public/",
@@ -16,7 +17,7 @@ module.exports = (env, argv) => {
   console.log(`This is the Webpack 4 'mode': ${argv.mode}`);
 
   var serverURL = 'http://localhost:8080/'; // Webpack Dev Server
-  var proxyURL = 'http://localhost:9090'; // Your external HTML server
+  var proxyURL = 'http://create-react-app-scratch.test'; // Your external HTML server
   var proxy = {
     '*': proxyURL
   };
@@ -46,12 +47,12 @@ module.exports = (env, argv) => {
     resolve: { extensions: ["*", ".js", ".jsx"] },
     output: {
       path: paths.outputPathAbs,
-      publicPath: ( 'production' !== argv.mode ) ? serverURL + paths.outputPath : paths.distFolder,
+      publicPath: ( 'production' !== argv.mode ) ? serverURL + paths.distFolder : paths.distFolder,
       filename: ( argv.mode !== 'production' ) ? "[name].js" : "[name].[hash].js",
     },
     resolve: { alias: {} },
     devServer: {
-      contentBase: serverURL + paths.outputPath,
+      contentBase: serverURL + paths.distFolder,
       proxy: proxy,
       host: '0.0.0.0',
       hot: true,
@@ -93,6 +94,34 @@ module.exports = (env, argv) => {
 
   if ( 'production' !== argv.mode ) {
     config.watch = true;
+  }
+
+  if ( 'production' !== argv.mode ) {
+    config.plugins.push(
+      new BrowserSyncPlugin({
+        // browse to http://localhost:9091/ during development,
+        proxy: proxyURL,
+        // proxy: "http://localhost:9090/",
+        port: 9091,
+        files: [ // watch on changes
+            {
+                match: ['public/**/*.php'],
+                fn: function (event, file) {
+                    if (event === 'change') {
+                        const bs = require('browser-sync').get('bs-webpack-plugin');
+                        bs.reload();
+                    }
+                }
+            }
+        ]
+      },
+      {
+        // prevent BrowserSync from reloading the page
+        // and let Webpack Dev Server take care of this
+        reload: false,
+        name: 'bs-webpack-plugin',
+      })
+    );
   }
 
   return config;
