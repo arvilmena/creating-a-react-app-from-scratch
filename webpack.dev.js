@@ -2,17 +2,21 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const myVariables = require('./webpack.variables');
 
-module.exports = merge(common, {
-    mode: 'development',
+const env = 'development';
+process.env.NODE_ENV = env;
+
+const config = {
+    mode: env,
     output: {
-        publicPath: common.serverURL + common.paths.distFolder,
+        publicPath: myVariables.serverURL + myVariables.paths.publicAssetFolder,
         filename: '[name].js',
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: common.serverURL + common.paths.distFolder,
-        proxy: common.proxy,
+        contentBase: myVariables.serverURL + myVariables.paths.publicAssetFolder,
+        proxy: myVariables.devServerProxy,
         host: '0.0.0.0',
         hot: true,
         headers: {
@@ -22,7 +26,7 @@ module.exports = merge(common, {
     },
     plugins: [
         new BrowserSyncPlugin({
-            proxy: common.proxyURL,
+            proxy: myVariables.proxyURL,
             // browse to http://localhost:9091/ during development,
             port: 9091,
             files: [ // watch on changes
@@ -50,4 +54,6 @@ module.exports = merge(common, {
             chunkFilename: '[id].[hash].css',
         })
     ],
-});
+};
+
+module.exports = merge(common, config);

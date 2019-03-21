@@ -1,38 +1,18 @@
-const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-
-var paths = {
-    publicFolder: "public/",
-    distFolder: "dist/",
-    outputPath: "public/dist/",
-    outputPathAbs: path.resolve(__dirname, "public/dist/"),
-};
-
-var serverURL = 'http://localhost:8080/'; // Webpack Dev Server
-var proxyURL = 'http://create-react-app-scratch.test'; // Your external HTML server
-var proxy = {
-  '*': proxyURL
-};
-
-const postCSSLoader = {
-    loader: 'postcss-loader',
-    options: {
-        sourceMap: true,
-    }
-};
+const myVariables = require('./webpack.variables');
 
 module.exports = {
     entry: {
         main : "./src/main.js",
-        globalStyles : "./src/App.scss",
+        globalStyles : "./src/main.scss",
     },
     output: {
-        path: paths.outputPathAbs,
+        path: myVariables.paths.outputPathAbs,
     },
     plugins: [
         new WriteFilePlugin(),
@@ -56,7 +36,7 @@ module.exports = {
                 'css-hot-loader',
                 "style-loader",
                 "css-loader",
-                postCSSLoader,
+                myVariables.loaders.postCSSLoader,
             ]
         },
         {
@@ -65,7 +45,7 @@ module.exports = {
                 'css-hot-loader',
                 MiniCssExtractPlugin.loader,
                 "css-loader",
-                postCSSLoader,
+                myVariables.loaders.postCSSLoader,
                 'sass-loader',
             ]
         },
