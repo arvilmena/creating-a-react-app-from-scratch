@@ -10,11 +10,17 @@ Clone this repo and install dependencies with `npm install`.
 
 ### Starting The Dev Server
 
-**Important!** Host the public folder into a vhost, with this `webpack.config.js` use:
+1. Get composer package
+
+```BASH
+npm install
+```
+
+2. **Important!** Host the public folder into a vhost, with this `webpack.config.js` use:
 
 ```http://create-react-app-scratch.test```
 
-Start Webpack Dev Server
+3. Start Webpack Dev Server
 
 ```BASH
 npm start

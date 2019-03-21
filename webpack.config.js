@@ -41,13 +41,18 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/,
           use: [
-            'css-hot-loader',
+            {
+              loader: 'css-hot-loader',
+              options: {
+                sourceMap: true 
+              }
+            },
             "style-loader",
             "css-loader",
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: 'inline'
+                sourceMap: true 
               }
             },
           ]
@@ -92,10 +97,10 @@ module.exports = (env, argv) => {
         {
           loader: 'postcss-loader',
           options: {
-            sourceMap: 'inline'
+            sourceMap: true
           }
         },
-        "sass-loader" // compiles Sass to CSS, using Node Sass by default
+        { loader: 'sass-loader', options: { sourceMap: true } }
     ]
   });
 
@@ -138,6 +143,10 @@ module.exports = (env, argv) => {
         name: 'bs-webpack-plugin',
       })
     );
+  }
+
+  if ( 'production' !== argv.mode ) {
+    config.devtool = 'inline-source-map';
   }
 
   return config;
