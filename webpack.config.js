@@ -40,7 +40,17 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.css$/,
-          use: ['css-hot-loader', "style-loader", "css-loader"]
+          use: [
+            'css-hot-loader',
+            "style-loader",
+            "css-loader",
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: 'inline'
+              }
+            },
+          ]
         },
       ]
     },
@@ -79,6 +89,12 @@ module.exports = (env, argv) => {
         // ( argv.mode !== 'production' ) ? 'style-loader' : MiniCssExtractPlugin.loader,
         MiniCssExtractPlugin.loader,
         "css-loader", // translates CSS into CommonJS
+        {
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: 'inline'
+          }
+        },
         "sass-loader" // compiles Sass to CSS, using Node Sass by default
     ]
   });

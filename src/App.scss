@@ -3,4 +3,8 @@
   font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
   background-color: black;
   color: red;
+  display: grid;
+  transition: all .5s;
+  user-select: none;
+  background: linear-gradient(to bottom, white, black);
 }
