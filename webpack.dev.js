@@ -1,14 +1,15 @@
+const env = 'development';
+process.env.NODE_ENV = env;
+
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const myVariables = require('./webpack.variables');
 
-const env = 'development';
-process.env.NODE_ENV = env;
-
 const config = {
     mode: env,
+    watch: true,
     output: {
         publicPath: myVariables.serverURL + myVariables.paths.publicAssetFolder,
         filename: '[name].js',
@@ -47,12 +48,6 @@ const config = {
             reload: false,
             name: 'bs-webpack-plugin',
           }),
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: '[name].css',
-            chunkFilename: '[id].[hash].css',
-        })
     ],
 };
 

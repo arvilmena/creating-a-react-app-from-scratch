@@ -1,12 +1,5 @@
-// module.exports = ({ file, options, env }) => ({
-//   plugins: {
-//     'cssnano': (env === 'production') ? {} : false,
-//     'autoprefixer': {},
-//   }
-// })
-
 module.exports = ({ file, options, env }) => {
-    console.log('ENVIRONMENT', env, process.env.NODE_ENV)
+    console.log('POSTCSS ENVIRONMENT', env, process.env.NODE_ENV)
 
     return {
         plugins: {

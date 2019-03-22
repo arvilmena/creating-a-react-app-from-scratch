@@ -15,6 +15,10 @@ module.exports = {
         path: myVariables.paths.outputPathAbs,
     },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: ( process.env.NODE_ENV === 'production' ) ? '[name].[hash].css' : '[name].css',
+            chunkFilename: ( process.env.NODE_ENV === 'production' ) ? '[id].[hash].css' : '[id].css',
+        }),
         new WriteFilePlugin(),
         new CleanWebpackPlugin(),
         new ManifestPlugin({
@@ -28,13 +32,13 @@ module.exports = {
             test: /\.(js|jsx)$/,
             exclude: /(node_modules|bower_components)/,
             loader: "babel-loader",
-            options: { presets: ["@babel/env"] }
+            // options: { presets: ["@babel/env"] }
         },
         {
             test: /\.css$/,
             use: [
                 'css-hot-loader',
-                "style-loader",
+                ( process.env.NODE_ENV === 'production' ) ?  MiniCssExtractPlugin.loader :  "style-loader",
                 "css-loader",
                 myVariables.loaders.postCSSLoader,
             ]
@@ -43,7 +47,7 @@ module.exports = {
             test: /\.scss$/,
             use: [
                 'css-hot-loader',
-                MiniCssExtractPlugin.loader,
+                ( process.env.NODE_ENV === 'production' ) ?  MiniCssExtractPlugin.loader :  "style-loader",
                 "css-loader",
                 myVariables.loaders.postCSSLoader,
                 'sass-loader',
