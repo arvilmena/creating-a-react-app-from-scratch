@@ -32,13 +32,13 @@ module.exports = {
             test: /\.(js|jsx)$/,
             exclude: /(node_modules|bower_components)/,
             loader: "babel-loader",
-            // options: { presets: ["@babel/env"] }
         },
         {
             test: /\.css$/,
             use: [
                 'css-hot-loader',
-                ( process.env.NODE_ENV === 'production' ) ?  MiniCssExtractPlugin.loader :  "style-loader",
+                // ( process.env.NODE_ENV === 'production' ) ?  MiniCssExtractPlugin.loader :  "style-loader",
+                MiniCssExtractPlugin.loader,
                 "css-loader",
                 myVariables.loaders.postCSSLoader,
             ]
@@ -47,7 +47,8 @@ module.exports = {
             test: /\.scss$/,
             use: [
                 'css-hot-loader',
-                ( process.env.NODE_ENV === 'production' ) ?  MiniCssExtractPlugin.loader :  "style-loader",
+                // ( process.env.NODE_ENV === 'production' ) ?  MiniCssExtractPlugin.loader :  "style-loader",
+                MiniCssExtractPlugin.loader,
                 "css-loader",
                 myVariables.loaders.postCSSLoader,
                 'sass-loader',
