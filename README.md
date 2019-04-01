@@ -4,29 +4,29 @@ This is a simple react implementation, as seen in [this article](https://blog.us
 
 ## Getting Started
 
-_(Note: this project was created in Node v9.3.0)_
-
-Clone this repo and install dependencies with `npm install`.
+_(Note: this project was created in Node v9.3.0) forked by Arvil who uses v6.4.1_
 
 ### Starting The Dev Server
 
-1. Get composer package
+1. Install Composer and NPM packages
 
-```BASH
-npm install
-```
+    ```BASH
+    composer install && npm istall
+    ```
 
 2. **Important!** Host the public folder into a vhost, with this `webpack.config.js` use:
 
-```http://create-react-app-scratch.test```
+    ```http://create-react-app-scratch.test```
 
-3. Start Webpack Dev Server
+3. Update `config.js` to suit your needs.
 
-```BASH
-npm start
-```
+4. Start Webpack Dev Server
 
-This starter uses webpack-dev-server to spin up an Express server with Hot-Reloading capability. Changes to code in `.src` should cause pages to reload.
+    ```BASH
+    npm start
+    ```
+
+This starter uses webpack-dev-server to spin up an Express server with Hot-Reloading capability.
 
 ### Production asset bundling ###
 
