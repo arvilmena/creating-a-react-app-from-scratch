@@ -1,8 +1,8 @@
-const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const config = require('./config');
 
 module.exports = {
@@ -14,6 +14,7 @@ module.exports = {
     jquery: 'jQuery'
   },
   plugins: [
+      new CaseSensitivePathsPlugin({debug: false}),
       new WriteFilePlugin(),
       new CleanWebpackPlugin(),
       new ManifestPlugin({
@@ -78,7 +79,7 @@ module.exports = {
             options: {
               limit: 1,
               fallback: 'file-loader',
-              name: '[name].[ext]',
+              name: '[name].[hash].[ext]',
               outputPath: config.dest.images,
             }
           },
@@ -99,7 +100,7 @@ module.exports = {
             options: {
               limit: 1,
               fallback: 'file-loader',
-              name: '[name].[ext]',
+              name: '[name].[hash].[ext]',
               outputPath: config.dest.fonts,
             }
           },
