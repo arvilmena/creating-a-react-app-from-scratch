@@ -72,40 +72,44 @@ module.exports = {
       },
       {
         test: /\.(jpg|jpeg|gif|png|svg)$/,
-        // exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
-            }
-          },
-          {
-            loader: 'file-loader',
-            options: {
+              limit: 1,
+              fallback: 'file-loader',
               name: '[name].[ext]',
               outputPath: config.dest.images,
-            },
+            }
           },
+          // {
+          //   loader: 'file-loader',
+          //   options: {
+          //     name: '[name].[ext]',
+          //     outputPath: config.dest.images,
+          //   },
+          // },
         ]
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
-        // exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
-            }
-          },
-          {
-            loader: 'file-loader',
-            options: {
+              limit: 1,
+              fallback: 'file-loader',
               name: '[name].[ext]',
               outputPath: config.dest.fonts,
-            },
+            }
           },
+          // {
+          //   loader: 'file-loader',
+          //   options: {
+          //     name: '[name].[ext]',
+          //     outputPath: config.dest.fonts,
+          //   },
+          // },
         ]
       }
     ]
