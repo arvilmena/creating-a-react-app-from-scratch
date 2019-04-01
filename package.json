@@ -2,10 +2,10 @@
   "name": "create-react-app-from-scratch",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
-    "build": "webpack --mode production"
+    "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -34,8 +34,10 @@
     "write-file-webpack-plugin": "^4.5.0"
   },
   "dependencies": {
-    "react-hot-loader": "^4.8.0",
     "css-hot-loader": "^1.4.4",
+    "file-loader": "^3.0.1",
+    "slick-carousel": "^1.8.1",
+    "url-loader": "^1.1.2",
     "webpack-dev-server": "^3.2.1"
   },
   "browserslist": [

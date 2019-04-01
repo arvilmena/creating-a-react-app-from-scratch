@@ -1,6 +1,11 @@
+$slick-font-path: "~slick-carousel/slick/fonts/";
+$slick-loader-path: "~slick-carousel/slick/";
+@import "~slick-carousel/slick/slick.scss";
+@import "~slick-carousel/slick/slick-theme.scss";
+
 .App {
   margin: 2rem;
   font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
   background-color: black;
-  color: red;
+  color: white;
 }

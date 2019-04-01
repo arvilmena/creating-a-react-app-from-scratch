@@ -1,20 +1,17 @@
 import React, { Component } from "react";
-import { hot } from "react-hot-loader";
 
-class App extends Component {
+export default class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log("test");
+    console.log('this.props', this.props);
   }
 
   render() {
     return (
       <div className="App">
-        <h1>asdasdasd?!</h1>
+        <h1>it still does!!</h1>
       </div>
     );
   }
 }
-
-export default hot(module)(App);

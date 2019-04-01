@@ -1,74 +1,113 @@
 const path = require("path");
-const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-
-var paths = {
-    publicFolder: "public/",
-    distFolder: "dist/",
-    outputPath: "public/dist/",
-    outputPathAbs: path.resolve(__dirname, "public/dist/"),
-};
-
-var serverURL = 'http://localhost:8080/'; // Webpack Dev Server
-var proxyURL = 'http://create-react-app-scratch.test'; // Your external HTML server
-var proxy = {
-  '*': proxyURL
-};
-
-const postCSSLoader = {
-    loader: 'postcss-loader',
-    options: {
-        sourceMap: true,
-    }
-};
+const config = require('./config');
 
 module.exports = {
-    entry: {
-        main : "./src/main.js",
-        globalStyles : "./src/App.scss",
-    },
-    output: {
-        path: paths.outputPathAbs,
-    },
-    plugins: [
-        new WriteFilePlugin(),
-        new CleanWebpackPlugin(),
-        new ManifestPlugin({
-          writeToFileEmit: true
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-    ],
-    module: {
-      rules: [
-        {
-            test: /\.(js|jsx)$/,
-            exclude: /(node_modules|bower_components)/,
-            loader: "babel-loader",
-            options: { presets: ["@babel/env"] }
-        },
-        {
-            test: /\.css$/,
-            use: [
-                'css-hot-loader',
-                "style-loader",
-                "css-loader",
-                postCSSLoader,
-            ]
-        },
-        {
-            test: /\.scss$/,
-            use: [
-                'css-hot-loader',
-                MiniCssExtractPlugin.loader,
-                "css-loader",
-                postCSSLoader,
-                'sass-loader',
-            ]
-        },
-      ]
-    },
+  entry: config.src,
+  output: {
+      path: config.dest.outputFolderAbsolute,
+  },
+  externals: {
+    jquery: 'jQuery'
+  },
+  plugins: [
+      new WriteFilePlugin(),
+      new CleanWebpackPlugin(),
+      new ManifestPlugin({
+        writeToFileEmit: true
+      }),
+      new MiniCssExtractPlugin({
+        filename: ( process.env.NODE_ENV === 'production' ) ? '[name].[hash].css' : '[name].css',
+        chunkFilename: ( process.env.NODE_ENV === 'production' ) ? '[id].[hash].css' : '[id].css',
+      }),
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: ['**/*','!**/*index.php'],
+      }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "babel-loader",
+        resolve: { extensions: [".js", ".jsx"] }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'css-hot-loader',
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'css-hot-loader',
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              includePaths: []
+            }
+          },
+        ]
+      },
+      {
+        test: /\.(jpg|jpeg|gif|png|svg)$/,
+        // exclude: /node_modules/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          },
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: config.dest.images,
+            },
+          },
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        // exclude: /node_modules/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          },
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: config.dest.fonts,
+            },
+          },
+        ]
+      }
+    ]
+  },
 };
