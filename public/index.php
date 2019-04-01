@@ -4,7 +4,6 @@
     use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 
     $package = new Package(new JsonManifestVersionStrategy(__DIR__.'/dist/manifest.json'));
-    
 ?>
 <!DOCTYPE html>
 <html>
