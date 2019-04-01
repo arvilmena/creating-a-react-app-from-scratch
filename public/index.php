@@ -17,7 +17,13 @@
 </head>
 
 <body>
-  <div id="root">test</div>
+  <div class="container">
+      <div class="row">
+          <div class="col col-12">
+              <div id="root">test</div>
+          </div>
+      </div>
+  </div>
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>

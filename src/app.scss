@@ -3,6 +3,12 @@ $slick-loader-path: "~slick-carousel/slick/";
 @import "~slick-carousel/slick/slick.scss";
 @import "~slick-carousel/slick/slick-theme.scss";
 
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_mixins.scss';
+@import './stylesheets/abstracts/_bootstrap4-overrides.scss';
+
+@import '~bootstrap/scss/bootstrap.scss';
+
 #root {
   margin: 2rem;
   font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;

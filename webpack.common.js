@@ -41,7 +41,12 @@ module.exports = {
         use: [
           'css-hot-loader',
           MiniCssExtractPlugin.loader,
-          "css-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -55,7 +60,12 @@ module.exports = {
         use: [
           'css-hot-loader',
           MiniCssExtractPlugin.loader,
-          "css-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {
