@@ -1,0 +1,12 @@
+@import './abstracts/vendor-slick';
+@import './abstracts/bootstrap4-overrides';
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+#root {
+  margin: 2rem;
+  font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+  background-color: black;
+  color: white;
+  background-image: url('./../images/Capital-Lettered-CAT.jpg');
+}

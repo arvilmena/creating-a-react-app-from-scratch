@@ -6,8 +6,7 @@ var webpackDevServer = 'http://localhost:8080/'; // Webpack Dev Server
 var vHost = 'http://create-react-app-scratch.test'; // Your vhost.
 
 const sources = {
-  mainJS : "./src/main.js",
-  mainCSS : "./src/main.scss",
+  main : "./src/main.js",
 };
 
 const outputFolder = './public/dist';

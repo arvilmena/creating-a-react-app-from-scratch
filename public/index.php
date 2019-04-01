@@ -12,7 +12,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>React Starter</title>
-  <link rel="stylesheet" href="<?php echo $package->getUrl('mainCSS.css') ?>">
+  <link rel="stylesheet" href="<?php echo $package->getUrl('main.css') ?>">
 </head>
 
 <body>
@@ -27,8 +27,7 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="<?php echo $package->getUrl('mainCSS.js'); ?>"></script>
-  <script src="<?php echo $package->getUrl('mainJS.js'); ?>"></script>
+  <script src="<?php echo $package->getUrl('main.js'); ?>"></script>
 </body>
 
 </html>

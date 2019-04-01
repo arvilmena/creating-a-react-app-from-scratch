@@ -10,5 +10,6 @@ if (module.hot) {
 
 import $ from 'jquery';
 import 'slick-carousel'
+import './stylesheets/stylesheets.scss';
 
 $('.some-element').slick();
