@@ -6,14 +6,8 @@ if (module.hot) {
 }
 /*  DON'T DELETE THIS CONDITION */
 
-// import React from "react";
-// import ReactDOM from "react-dom";
-// import App from "./app.js";
-//
-// ReactDOM.render(<App />, document.getElementById("root"));
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./javascripts/App";
 
-import $ from 'jquery';
-import 'slick-carousel'
-import './stylesheets/stylesheets.scss';
-
-$('.some-element').slick();
+ReactDOM.render(<App />, document.getElementById("root"));
