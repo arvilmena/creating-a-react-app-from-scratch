@@ -3,6 +3,7 @@ process.env.NODE_ENV = env;
 
 const merge = require('webpack-merge');
 const webpack = require("webpack");
+const chokidar = require("chokidar");
 const common = require('./webpack.common');
 const config = require('./config');
 
@@ -24,6 +25,22 @@ module.exports = merge(common, {
       'Access-Control-Allow-Headers': '*',
     },
     disableHostCheck: true,
+    before:(app, server) => {
+      console.log('watching: ', config.devServer.watchAndReload);
+      const watcher = chokidar.watch(config.devServer.watchAndReload, {
+        alwaysStat: true,
+        atomic: false,
+        followSymlinks: false,
+        ignoreInitial: true,
+        ignorePermissionErrors: true,
+        persistent: true,
+        usePolling: true,
+      });
+      watcher
+        .on("all", (event, path, details) => {
+          server.sockWrite( server.sockets, "content-changed" );
+        });
+    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

@@ -37,49 +37,33 @@ module.exports = {
         resolve: { extensions: [".js", ".jsx"] }
       },
       {
-        test: /\.css$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          'css-hot-loader',
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-            }
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
-            }
-          },
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'css-hot-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-            }
+            },
           },
           {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              includePaths: []
-            }
+            },
           },
-        ]
+        ],
       },
       {
         test: /\.(jpg|jpeg|gif|png|svg)$/,
@@ -93,13 +77,6 @@ module.exports = {
               outputPath: config.dest.images,
             }
           },
-          // {
-          //   loader: 'file-loader',
-          //   options: {
-          //     name: '[name].[ext]',
-          //     outputPath: config.dest.images,
-          //   },
-          // },
         ]
       },
       {
@@ -114,13 +91,6 @@ module.exports = {
               outputPath: config.dest.fonts,
             }
           },
-          // {
-          //   loader: 'file-loader',
-          //   options: {
-          //     name: '[name].[ext]',
-          //     outputPath: config.dest.fonts,
-          //   },
-          // },
         ]
       }
     ]

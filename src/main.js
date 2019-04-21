@@ -6,6 +6,8 @@ if (module.hot) {
 }
 /*  DON'T DELETE THIS CONDITION */
 
+import './stylesheets/stylesheets.scss';
+
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./javascripts/App";

@@ -29,6 +29,8 @@ module.exports = {
   },
   devServer: {
     proxy: webpackDevServer,
-    // contentBase: vHost + assetBasePath,
+    watchAndReload: [
+      path.resolve(__dirname, './public/') + '/index.php',
+    ]
   }
 };
