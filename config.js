@@ -5,7 +5,7 @@ const path = require('path');
 var webpackDevServer = 'http://localhost:8080/'; // Webpack Dev Server
 
 const sources = {
-  main : "./src/main.js",
+  main : "./src/main.jsx",
 };
 
 const outputFolder = './public/dist';
