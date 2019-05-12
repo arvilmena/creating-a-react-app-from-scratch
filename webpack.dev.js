@@ -15,6 +15,8 @@ module.exports = merge(common, {
   },
   devtool: 'inline-source-map',
   devServer: {
+    host: "localhost",
+    port: 8080,
     proxy: {
       "**": config.devServer.proxy
     },
@@ -37,7 +39,7 @@ module.exports = merge(common, {
         usePolling: true,
       });
       watcher
-        .on("all", (event, path, details) => {
+        .on("all", () => {
           server.sockWrite( server.sockets, "content-changed" );
         });
     },
