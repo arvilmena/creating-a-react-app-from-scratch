@@ -3,7 +3,6 @@ const path = require('path');
 /* Start editing the values below */
 
 var webpackDevServer = 'http://localhost:8080/'; // Webpack Dev Server
-var vHost = 'http://create-react-app-scratch.test'; // Your vhost.
 
 const sources = {
   main : "./src/main.js",
