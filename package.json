@@ -9,6 +9,18 @@
     "lint": "cross-env eslint 'src/**/*.{js,jsx}' --fix",
     "format": "cross-env prettier --write 'src/**/*.{js,jsx,css,scss}'"
   },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -29,6 +41,8 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
+    "husky": "^2.2.0",
+    "lint-staged": "^8.1.6",
     "mini-css-extract-plugin": "^0.6.0",
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
